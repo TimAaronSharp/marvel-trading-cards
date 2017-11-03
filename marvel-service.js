@@ -14,16 +14,18 @@ function MarvelService() {
   this.getMyCharacters = function getMyCharacters(id) {
     //what should this function return
     return JSON.parse(JSON.stringify(myCharacters))
-           
+
   }
 
   this.addToMyCharacters = function addToMyCharacters(id) {
     //in order to add a character to your list you will first need to find 
     //the character by its id in the marvelCharacters array
-    for (var i = 0; i < marvelCharacters.length; i++) {
-      if (marvelCharacters[i].id == id) {
-        myCharacters.push(marvelCharacters[i]) //ADDS CHAR TO MYCHARACTERS ARRAY
-        marvelCharacters.splice(marvelCharacters[i], 1) //REMOVES CHAR FROM MARVELCHARACTERS ARRAY. MAKES IT SO THEY CAN'T ADD MORE THAN ONE OF THE SAME CHAR, BUT PROBABLY WON'T WORK FOR                                                      MUTLI-TEAM BONUS CHALLENGE. MIGHT NEED TO REVISIT.
+    if (myCharacters.length < 6) {
+      for (var i = 0; i < marvelCharacters.length; i++) {
+        if (marvelCharacters[i].id == id) {
+          myCharacters.push(marvelCharacters[i]) //ADDS CHAR TO MYCHARACTERS ARRAY
+          marvelCharacters.splice(i, 1) //REMOVES CHAR FROM MARVELCHARACTERS ARRAY. MAKES IT SO THEY CAN'T ADD MORE THAN ONE OF THE SAME CHAR, BUT PROBABLY WON'T WORK FOR                                                      MUTLI-TEAM BONUS CHALLENGE. MIGHT NEED TO REVISIT.
+        }
       }
     }
     console.log(myCharacters)
@@ -34,6 +36,13 @@ function MarvelService() {
   this.removeMyCharacter = function removeMyCharacter(id) {
     //you need to find the character that you want to remove by its id
     //and remove it.
+    debugger
+    for (var i = 0; i < myCharacters.length; i++) {
+      if (myCharacters[i].id == id) {
+        marvelCharacters.push(myCharacters[i])//ADDS CHAR TO MYCHARACTERS ARRAY
+        myCharacters.splice(i, 1) //REMOVES CHAR FROM MARVELCHARACTERS ARRAY. MAKES IT SO THEY CAN'T ADD MORE THAN ONE OF THE SAME CHAR, BUT PROBABLY WON'T WORK FOR                                                 MUTLI-TEAM BONUS CHALLENGE. MIGHT NEED TO REVISIT.
+      }
+    }
   }
 
 

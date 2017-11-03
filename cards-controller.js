@@ -3,12 +3,18 @@ function CardsController() {
 
   this.add = function add(id) {
     marvelService.addToMyCharacters(id)
+    updateMarvel(marvelService.getMarvelCharacters())
     updateRoster()
   }
   marvelService.getCharacters(ready)
-  function ready(data) {
 
+  function ready(data) {
     updateMarvel(data)
+  }
+  this.remove = function remove(id) {
+    marvelService.removeMyCharacter(id)
+    updateRoster(marvelService.getMyCharacters())
+    updateMarvel(marvelService.getMarvelCharacters())
   }
 
   function updateMarvel(list) {
@@ -30,10 +36,10 @@ function CardsController() {
 
       elem.innerHTML = marvelTemplate
     }
-    console.log(marvelService.marvelCharacters)
-    console.log(marvelService.myCharacters)
+    // console.log(marvelService.marvelCharacters)
+    // console.log(marvelService.myCharacters)
   }
-  function updateRoster() {
+  function updateRoster(id) {
     var myChars = marvelService.getMyCharacters()
     var myElem = document.getElementById('my-characters')
     myElem.innerHTML = ''
@@ -45,7 +51,7 @@ function CardsController() {
         <img src="${myChar.thumbnail.path}.${myChar.thumbnail.extension}" width="100">
         <h3>${myChar.name}</h3>
       
-         <button class="btn-success" id="${myChar.id}" onclick="app.controllers.cardsController.add('${myChar.id}')">Add to Team</button>
+         <button class="btn-success" id="${myChar.id}" onclick="app.controllers.cardsController.remove('${myChar.id}')">Remove from Team</button>
       
     </div>
       `
